@@ -36,7 +36,15 @@ touch Dockerfile
 ```
 
 - Using the text editor of your choice, paste the below content:
-Note: Details about the below Dockerfile have already been shared in the video
+Note: Details about the below Dockerfile have already been shared in the video  
+
+move the required things and install the required packages in installer stage  
+move just the build to the NGINX container that will serve the app   
+
+Files copied during the COPY . . in the installer stage are not persisted to the final image unless you explicitly copy them using COPY --from=installer in the deployer stage.  
+The COPY --from=installer command persists the built files (/app/build) to the /usr/share/nginx/html directory in the NGINX container, where they will be served.  
+
+exec -it (interactive tty) gives default pwd as / (since WORKDIR is not specified in deployer stage) 
 ```
 FROM node:18-alpine AS installer
 WORKDIR /app
