@@ -31,7 +31,9 @@ cd getting-started-app/
 ```
 touch Dockerfile
 ```
-- Using the text editor of your choice, paste the below content ( Details about each of these have already shared in the video)
+- Using the text editor of your choice, paste the below content ( Details about each of these have already shared in the video)  
+WORKDIR &lt;dir in container&gt;  
+COPY &lt;local dir&gt; &lt;dir in container&gt;  
 ```
 FROM node:18-alpine
 WORKDIR /app
@@ -41,8 +43,8 @@ CMD ["node", "src/index.js"]
 EXPOSE 3000
 ```
 
-- Build the docker image using the application code and Dockerfile
-
+- Build the docker image using the application code and Dockerfile  
+creates the images in layers  
 ```
 docker build -t day02-todo .
 ```
@@ -51,7 +53,8 @@ docker build -t day02-todo .
 docker images
 ```
 
-- Create a public repository on hub.docker.com and push the image to remote repo
+- Create a public repository on hub.docker.com and push the image to remote repo  
+docker tag local-image:tagname new-repo:tagname  
 ```
 docker login
 docker tag day02-todo:latest username/new-reponame:tagname
@@ -59,13 +62,15 @@ docker images
 docker push username/new-reponame:tagname
 ```
 
-- To pull the image to another environment , you can use below command
+- To pull the image to another environment , you can use below command  
+if the image is already present, then it pulls only the changed layers  
 ```
 docker pull username/new-reponame:tagname
 ```
 
-- To start the docker container, use below command
-
+- To start the docker container, use below command  
+-d (to run in background)  
+&lt;port on local machine (host)&gt;:&lt;port inside the Docker container&gt;  
 ```
 docker run -dp 3000:3000 username/new-reponame:tagname
 ```
