@@ -19,11 +19,13 @@
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/b8aeb299-9fc9-49da-9c87-0a6eb948ebd1)
 
-## Scheduler: decide which pod to be scheduled on which node based on different factors
+## Scheduler: decide which pod to be scheduled on which node based on different factors  
+(it sends the data to API server after it makes a decision)  
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/189208b6-a01e-4e3f-baf9-ae9a9d0f3daf)
 
-## Controller Manager
+## Controller Manager  
+(controls: node controller, pod controller, deployment controller etc,.)  
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/9aece452-6d76-452f-9c89-0f7825151312)
 
@@ -31,7 +33,8 @@
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/81e037e3-78f0-41a7-8589-f2b4ec3af511)
 
-## Kubelet - Node-level agent that helps container management and receives instructions from Api server
+## Kubelet - Node-level agent that helps container management and receives instructions from Api server  
+(acts as intermediator between the node and the pod, establishes a watch stream to the API Server and continuously monitors for updates to resources it's responsible for)   
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/bd178509-c49c-4206-bc11-147ac91d2713)
 
