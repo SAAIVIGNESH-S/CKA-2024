@@ -26,17 +26,20 @@ nodes:
 
 ### What is Service in Kubernetes
 
-Different applications communicate with each other within Kubernetes using a service; it is also used to access applications outside the cluster.
+Different applications communicate with each other within Kubernetes using a service; it is also used to access applications outside the cluster.  
+(services route the requests in round robin method)  
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/e768b073-dd7b-478a-bbea-ad6acae18051)
 
 There are 4 types of Services:
-- ClusterIP(For Internal access)
-- NodePort(To access the application on a particular port)
+- ClusterIP(For Internal access as pod IP is dynamic) (default service type)
+- NodePort(To access the application on a particular port) (30000-32767)
 - LoadBalancer(To access the application on a domain name or IP address without using the port number)
 - External (To use an external DNS for routing)
 
 ### ClusterIP
+
+kubectl describe svc/<clusterip_svc> has a field Endpoints and maps to the IP of the pod (gets updated when the pod restarts)  
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/3817a5e7-5208-41c8-9dee-d4c052038151)
 
@@ -58,6 +61,10 @@ spec:
 
 
 ### NodePort
+
+targetPort - port on which the application pod is listening on (not externally exposed)  
+nodePort - exposed externally  (forwards request to targetPort)  
+port - internal port (other resources in cluster uses this port)  
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/8aa9c482-be3a-450a-95b7-0a0c0e80403e)
 
@@ -82,7 +89,8 @@ spec:
 
 
 ### LoadBalancer
-- Your loadbalancer service will act as nodeport if you are not using any managed cloud Kubernetes such as GKE,AKS,EKS etc. In a managed cloud environment, Kubernetes creates a load balancer within the cloud project, which redirects the traffic to the Kubernetes Loadbalancer service.
+- Your loadbalancer service will act as nodeport if you are not using any managed cloud Kubernetes such as GKE,AKS,EKS etc. In a managed cloud environment, Kubernetes creates a load balancer within the cloud project, which redirects the traffic to the Kubernetes Loadbalancer service.  
+(LoadBalancer provides publicly accessible IP addresses for external traffic distribution)  
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/8f5acc88-4394-47e9-a3c5-041d396166d0)
 
@@ -104,6 +112,7 @@ spec:
 ```
 
 #### Sample YAML for external name
+(allows to map a service name within the cluster to an external DNS name)  
 
 ```yaml
 apiVersion: v1
