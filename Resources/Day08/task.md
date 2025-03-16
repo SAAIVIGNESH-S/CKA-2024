@@ -14,14 +14,42 @@ In this exercise, you will create a Deployment with multiple replicas. After ins
 
 ## Deployment
 1. Create a Deployment named `nginx` with 3 replicas. The Pods should use the `nginx:1.23.0` image and the name `nginx`. The Deployment uses the label `tier=backend`. The Pod template should use the label `app=v1`.
-2. List the Deployment and ensure the correct number of replicas is running.
-3. Update the image to `nginx:1.23.4`.
-4. Verify that the change has been rolled out to all replicas.
-5. Assign the change cause "Pick up patch version" to the revision.
-6. Scale the Deployment to 5 replicas.
-7. Have a look at the Deployment rollout history.
-8. Revert the Deployment to revision 1.
-9. Ensure that the Pods use the image `nginx:1.23.0`.
+2. List the Deployment and ensure the correct number of replicas is running.  
+   `kubectl get deploy/nginx`
+4. Update the image to `nginx:1.23.4`.  
+   `kubectl set image deploy/nginx nginx=nginx:1.23.4`
+5. Verify that the change has been rolled out to all replicas.  
+   `kubectl rollout status deploy/nginx`
+6. Assign the change cause "Pick up patch version" to the revision.
+7. Scale the Deployment to 5 replicas.
+8. Have a look at the Deployment rollout history.
+9. Revert the Deployment to revision 1.  
+    `kubectl rollout undo deploy/nginx --to-revision=1`
+11. Ensure that the Pods use the image `nginx:1.23.0`.
+
+```YAML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    tier: backend
+  name: nginx
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        apps: v1
+      name: nginx-container
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.23.0
+  selector:
+    matchLabels:
+      apps: v1
+```
+
 
 ## Troubleshooting the issue
 1. Apply the below YAML and fix the issue with it
