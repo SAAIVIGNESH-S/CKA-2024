@@ -34,6 +34,7 @@ https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/3e9792d4-1127-44b4-a6ec-cdc2a82219e3)
 
+(apiVersion is apps/v1 because explain gives the group as apps and version is v1)  
 (manages the pod that matches the label env:demo)
 ```YAML
 apiVersion: apps/v1
