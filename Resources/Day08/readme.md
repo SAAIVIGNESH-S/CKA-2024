@@ -5,7 +5,7 @@ https://kubernetes.io/docs/reference/kubectl/quick-reference/
 
 ### Replication Controller (deprecated)
 can manage only the pods that are created using it  
-load balancing between the replicas is done by the replication conroller manager
+load balancing between the replicas is done by the replication conroller manager  
 https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/
 
 ```YAML
