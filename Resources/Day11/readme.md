@@ -4,6 +4,12 @@
 
 [![Day11/40 - Multi Container Pod Kubernetes - Sidecar vs Init Container](https://img.youtube.com/vi/yRiFq1ykBxc/sddefault.jpg)](https://youtu.be/yRiFq1ykBxc)
 
+initContainers - run before the main container (uses the resource of the pod)  
+sidecar/helper - run alongside the main container  
+
+the command and args can be combined in the command arg or can be separate  
+the variable in env of myapp-container will be accesible once the pod is up  
+once a pod is up, we cannot add or remove containers  
 
 ## Sample YAML used in the demo
 
