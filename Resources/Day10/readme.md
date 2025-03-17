@@ -17,7 +17,8 @@
 
 A pod in one namespace can communicate to pod in other namespace using the pod IP  
 But since pod IP is dynamic we use service  
-But a service in one namespace can communicate to service in other namespace using FQDN only (service name along with its namespace) (curl <svc_name>.<namespace_name>.svc.cluster.local)
+A service in one namespace can communicate to service in other namespace using its IP or FQDN (service name along with its namespace) but not hostname  
+(curl <svc_name>.<namespace_name>.svc.cluster.local)
 
 ```
 cat /etc/resolv.conf (in pod)
