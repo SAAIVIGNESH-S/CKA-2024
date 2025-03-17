@@ -15,5 +15,22 @@
 
 ![image](https://github.com/piyushsachdeva/CKA-2024/assets/40286378/d9ae95d5-7224-4d5b-b260-ed09fc53c6fd)
 
+A pod in one namespace can communicate to pod in other namespace using the pod IP  
+But since pod IP is dynamic we use service  
+But a service in one namespace can communicate to service in other namespace using FQDN only (service name along with its namespace) (curl <svc_name>.<namespace_name>.svc.cluster.local)
 
+```
+cat /etc/resolv.conf (in pod)
+search demo.svc.cluster.local svc.cluster.local cluster.local
+nameserver 10.96.0.10
+options ndots:5
+```
 
+kubectl create ns <namespace_name>
+
+```YAML
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace_name
+```
